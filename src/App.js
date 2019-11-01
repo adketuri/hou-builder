@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Level from "./components/Level/Level";
 import Stats from "./components/Stats/Stats";
+import {Container} from "react-bootstrap";
 
 function App() {
-  return (<div>
-    <Level/>
+  return (<Container>
     <Stats/>
-  </div>);
+  </Container>);
 }
 
 export default App;

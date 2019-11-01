@@ -12,12 +12,29 @@ export default class Stat extends Component {
         this.state = {value: this.min}
     }
 
+    handleIncrement = () => {
+        this.setState((state, props) => ({value: state.value + 1}));
+        this.props.onStatChange(this.props.id, 1);
+    };
+
+    handleDecrement = () => {
+        if (this.state.value > process.env.REACT_APP_MIN_STAT) {
+            this.setState((state, props) => ({value: state.value - 1}));
+            this.props.onStatChange(this.props.id, -1);
+        }
+    };
+
     render() {
         return (
             <Row>
                 <Col>{this.props.name}</Col>
-                <Col><StatButton id={this.props.id} operation="subtract"/>{this.state.value}<StatButton
-                    id={this.props.id} operation="add"/></Col>
+                <Col>
+                    <StatButton id={this.props.id} operation="subtract" value={this.state.value}
+                                onClick={this.handleDecrement}/>
+                    {this.state.value}
+                    <StatButton id={this.props.id} operation="add" value={this.state.value}
+                                onClick={this.handleIncrement}/>
+                </Col>
             </Row>
         );
     }
