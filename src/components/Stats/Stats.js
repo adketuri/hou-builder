@@ -5,13 +5,6 @@ import {connect} from "react-redux";
 
 class Stats extends Component {
 
-    constructor(props) {
-        super(props);
-        this.minimumAllocatedStats = process.env.REACT_APP_MIN_STAT * this.props.stats.length;
-        this.allocatedStats = this.minimumAllocatedStats;
-        this.state = {level: 1, rebirth: false}
-    }
-
     render() {
         const listItems = [];
         for (const key in this.props.stats) {
@@ -19,7 +12,7 @@ class Stats extends Component {
         }
         return (
             <div>
-                <Level value={this.state.level}/>
+                <Level value={this.props.level}/>
                 {listItems}
             </div>
         );
@@ -29,7 +22,8 @@ class Stats extends Component {
 /** Takes in the state (from our store) and passes it down as this component's props. */
 function mapStateToProps(state) {
     return {
-        stats: state.stats
+        stats: state.primaryStats.stats,
+        level: state.primaryStats.level
     };
 }
 

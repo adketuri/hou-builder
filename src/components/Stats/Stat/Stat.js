@@ -11,13 +11,17 @@ class Stat extends Component {
     render() {
         return (
             <Row>
-                <Col>{this.props.name}</Col>
                 <Col>
-                    <StatButton id={this.props.name} operation="subtract" value={this.props.value}
+                    <span className="stat-name mx-auto">{this.props.name}</span>
+                    <StatButton id={this.props.name} operation="subtract" value="-10"
+                                onClick={() => this.props.changeStat(this.props.name, -10)}/>
+                    <StatButton id={this.props.name} operation="subtract" value="-1"
                                 onClick={() => this.props.changeStat(this.props.name, -1)}/>
-                    {this.props.value}
-                    <StatButton id={this.props.name} operation="add" value={this.props.value}
+                    <span className="stat-changer mx-auto">{this.props.value}</span>
+                    <StatButton id={this.props.name} operation="add" value="+1"
                                 onClick={() => this.props.changeStat(this.props.name, 1)}/>
+                    <StatButton id={this.props.name} operation="add" value="+10"
+                                onClick={() => this.props.changeStat(this.props.name, 10)}/>
                 </Col>
             </Row>
         );
