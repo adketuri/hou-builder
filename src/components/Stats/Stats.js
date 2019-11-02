@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import Stat from "./Stat/Stat";
 import Level from "./Level/Level";
+import {connect} from "react-redux";
 
-export default class Stats extends Component {
+class Stats extends Component {
 
     constructor(props) {
         super(props);
-        this.stats = ['Power', 'Stamina', 'Wisdom'];
-        this.minimumAllocatedStats = process.env.REACT_APP_MIN_STAT * this.stats.length;
+        this.minimumAllocatedStats = process.env.REACT_APP_MIN_STAT * this.props.stats.length;
         this.allocatedStats = this.minimumAllocatedStats;
         this.state = {level: 1, rebirth: false}
     }
@@ -21,8 +21,8 @@ export default class Stats extends Component {
     };
 
     render() {
-        const listItems = this.stats.map((stat) =>
-            <Stat onStatChange={this.onStatChange} key={stat.toLowerCase()} id={stat.toLowerCase()} name={stat}/>
+        const listItems = this.props.stats.map((stat) =>
+            <Stat onStatChange={this.onStatChange} key={stat.id} id={stat.id} name={stat.name}/>
         );
         return (
             <div>
@@ -31,5 +31,13 @@ export default class Stats extends Component {
             </div>
         );
     }
-
 }
+
+/** Takes in the state (from our store) and passes it down as this component's props. */
+function mapStateToProps(state) {
+    return {
+        stats: state.stats
+    };
+}
+
+export default connect(mapStateToProps)(Stats);
