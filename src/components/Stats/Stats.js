@@ -12,18 +12,11 @@ class Stats extends Component {
         this.state = {level: 1, rebirth: false}
     }
 
-    onStatChange = (id, change) => {
-        console.log("Stat change " + id + " " + change);
-        this.allocatedStats += change;
-        this.setState((props, state) => ({
-            level: Math.ceil((this.allocatedStats - this.minimumAllocatedStats) / 2 + 1)
-        }));
-    };
-
     render() {
-        const listItems = this.props.stats.map((stat) =>
-            <Stat onStatChange={this.onStatChange} key={stat.id} id={stat.id} name={stat.name}/>
-        );
+        const listItems = [];
+        for (const key in this.props.stats) {
+            listItems.push(<Stat key={key} name={key} value={this.props.stats[key]}/>);
+        }
         return (
             <div>
                 <Level value={this.state.level}/>
