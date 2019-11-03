@@ -14,3 +14,17 @@ export const changeEquipment = (slot, equipment) => {
     }
 };
 
+export const showEquipment = (slot) => {
+    return {
+        type: "EQUIPMENT_SHOWN",
+        payload: slot
+    }
+};
+
+export const hideEquipment = () => {
+    return {
+        type: "EQUIPMENT_HIDE",
+        payload: {}
+    }
+};
+

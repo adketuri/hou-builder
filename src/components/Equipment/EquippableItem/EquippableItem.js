@@ -1,19 +1,20 @@
 import * as React from "react";
 import {bindActionCreators} from "redux";
-import {changeEquipment} from "../../../actions";
+import {changeEquipment, showEquipment} from "../../../actions";
 import {connect} from "react-redux";
 import {Button} from "react-bootstrap";
 
 class EquippableItem extends React.Component {
 
     render() {
-        console.log(this.props);
         if (this.props.item == null) {
-            return <div>No item</div>;
+            return <div><Button variant="primary" onClick={() => this.props.showEquipment(this.props.slot)}>Equip
+                something</Button></div>;
         }
         return <div>
             {this.props.item.name}
-            <Button variant="danger" onClick={() => this.props.changeEquipment(this.props.slot, null)}>X</Button>
+            <Button variant="danger" className="unequip btn-sm"
+                    onClick={() => this.props.changeEquipment(this.props.slot, null)}>X</Button>
         </div>;
     }
 }
@@ -25,7 +26,7 @@ function mapStateToProps(state, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({changeEquipment: changeEquipment}, dispatch)
+    return bindActionCreators({changeEquipment: changeEquipment, showEquipment: showEquipment}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EquippableItem);

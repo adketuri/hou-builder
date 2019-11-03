@@ -28,5 +28,4 @@ export default function (state = equipment, action) {
         default:
             return state;
     }
-
 }

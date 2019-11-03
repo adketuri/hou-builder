@@ -3,6 +3,7 @@ import {bindActionCreators} from "redux";
 import {changeEquipment} from "../../actions"
 import {connect} from "react-redux";
 import EquippableItem from "./EquippableItem/EquippableItem";
+import EquipmentListModal from "./EquipmentListModal/EquipmentListModal";
 
 class Equipment extends Component {
 
@@ -12,7 +13,10 @@ class Equipment extends Component {
         slots.forEach((slot, index) => {
             equipment.push(<EquippableItem key={slot} slot={slot} value={this.props.equipment[slot]}/>);
         });
-        return (<div>{equipment}</div>);
+        return (<>
+            <EquipmentListModal/>
+            {equipment}
+        </>);
     }
 }
 
