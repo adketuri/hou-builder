@@ -12,7 +12,7 @@ class EquippableItem extends React.Component {
                 something</Button></div>;
         }
         return <div>
-            {this.props.item.name}
+            <span className="item-name">{this.props.item.name}</span>
             <Button variant="danger" className="unequip btn-sm"
                     onClick={() => this.props.changeEquipment(this.props.slot, null)}>X</Button>
         </div>;

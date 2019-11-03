@@ -9,10 +9,11 @@ class EquipmentListModal extends React.Component {
 
     render() {
         const handleClose = () => this.props.hideEquipment();
+        const title = this.props.activeSlot ? this.props.activeSlot.replace(/^\w/, c => c.toUpperCase()) : '';
         return (
             <Modal show={this.props.visible} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{this.props.activeSlot}</Modal.Title>
+                    <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
                 <Modal.Footer>
@@ -20,6 +21,16 @@ class EquipmentListModal extends React.Component {
                 </Modal.Footer>
             </Modal>
         );
+    }
+
+    componentDidMount() {
+        fetch('http://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                // this.setState({ contacts: data })
+            })
+            .catch(console.log)
     }
 }
 
