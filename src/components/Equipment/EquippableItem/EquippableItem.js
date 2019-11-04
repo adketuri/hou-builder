@@ -3,6 +3,7 @@ import {bindActionCreators} from "redux";
 import {changeEquipment, showEquipment} from "../../../actions";
 import {connect} from "react-redux";
 import {Button} from "react-bootstrap";
+import ItemDetails from "./ItemDetails/ItemDetails";
 
 class EquippableItem extends React.Component {
 
@@ -12,7 +13,7 @@ class EquippableItem extends React.Component {
                 something</Button></div>;
         }
         return <div>
-            <span className="item-name">{this.props.item.name}</span>
+            <ItemDetails item={this.props.item}/>
             <Button variant="danger" className="unequip btn-sm"
                     onClick={() => this.props.changeEquipment(this.props.slot, null)}>X</Button>
         </div>;
