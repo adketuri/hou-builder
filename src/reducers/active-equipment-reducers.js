@@ -1,22 +1,4 @@
-const equipment = {
-    "weapon": {
-        "name": "Wooden Sword",
-        "atk": 5,
-        "type": "sword"
-    },
-    "armor": {
-        "name": "Scrap Leather",
-        "def": 5
-    },
-    "helmet": {
-        "name": "Scrap Helmet",
-        "def": 5
-    },
-    "other": {
-        "name": "Scrap Accessory",
-        "def": 5
-    }
-};
+const equipment = {};
 
 export default function (state = equipment, action) {
     switch (action.type) {

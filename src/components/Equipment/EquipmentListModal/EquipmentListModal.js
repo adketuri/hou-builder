@@ -11,6 +11,10 @@ class EquipmentListModal extends React.Component {
 
     render() {
         const handleClose = () => this.props.hideEquipment();
+        const handleUnequip = () => {
+            this.props.changeEquipment(this.props.slot, undefined);
+            this.props.hideEquipment();
+        };
         const title = this.props.activeSlot ? this.props.activeSlot.replace(/^\w/, c => c.toUpperCase()) : '';
         const itemElements = [];
 
@@ -43,6 +47,7 @@ class EquipmentListModal extends React.Component {
 
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant="secondary" onClick={handleUnequip}>Unequip {this.props.activeSlot}</Button>
                     <Button variant="primary" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
@@ -61,8 +66,9 @@ class EquipmentListModal extends React.Component {
                 return "other";
             case 11:
                 return "orb";
+            default:
+                return undefined;
         }
-        return undefined;
     }
 
     componentDidMount() {

@@ -9,14 +9,15 @@ class EquippableItem extends React.Component {
 
     render() {
         if (this.props.item == null) {
-            return <div><Button variant="primary" onClick={() => this.props.showEquipment(this.props.slot)}>Equip
-                something</Button></div>;
+            return <tr>
+                <td>{this.props.slot}</td>
+                <td colspan="3">
+                    <Button variant="primary" onClick={() => this.props.showEquipment(this.props.slot)} block>Equip
+                        Something</Button>
+                </td>
+            </tr>;
         }
-        return <div>
-            <ItemDetails item={this.props.item}/>
-            <Button variant="danger" className="unequip btn-sm"
-                    onClick={() => this.props.changeEquipment(this.props.slot, null)}>X</Button>
-        </div>;
+        return <ItemDetails slot={this.props.slot} item={this.props.item} equip={true}/>;
     }
 }
 

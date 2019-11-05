@@ -4,6 +4,7 @@ import {changeEquipment} from "../../actions"
 import {connect} from "react-redux";
 import EquippableItem from "./EquippableItem/EquippableItem";
 import EquipmentListModal from "./EquipmentListModal/EquipmentListModal";
+import Table from "react-bootstrap/Table";
 
 class Equipment extends Component {
 
@@ -15,7 +16,19 @@ class Equipment extends Component {
         });
         return (<>
             <EquipmentListModal/>
-            {equipment}
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Slot</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Stats</th>
+                </tr>
+                </thead>
+                <tbody>
+                {equipment}
+                </tbody>
+            </Table>
         </>);
     }
 }
