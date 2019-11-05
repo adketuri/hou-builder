@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import {changeEquipment, hideEquipment, showEquipment} from "../../../actions";
 import {connect} from "react-redux";
 import ItemDetails from "../EquippableItem/ItemDetails/ItemDetails";
+import Table from "react-bootstrap/Table";
 
 class EquipmentListModal extends React.Component {
 
@@ -13,10 +14,12 @@ class EquipmentListModal extends React.Component {
         const title = this.props.activeSlot ? this.props.activeSlot.replace(/^\w/, c => c.toUpperCase()) : '';
         const itemElements = [];
 
-        if (this.state != null) {
+        if (this.state != null && this.props.activeSlot) {
             for (const i in this.state.items) {
                 const item = this.state.items[i];
-                itemElements.push(<div key={item.id}><ItemDetails slot={this.props.activeSlot} item={item}/></div>);
+                if (this.props.activeSlot === this.getSlot(item.type)) {
+                    itemElements.push(<ItemDetails key={i} slot={this.props.activeSlot} item={item}/>);
+                }
             }
         }
         return (
@@ -24,7 +27,21 @@ class EquipmentListModal extends React.Component {
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{itemElements}</Modal.Body>
+                <Modal.Body>
+                    <Table striped bordered hover>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Stats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {itemElements}
+                        </tbody>
+                    </Table>
+
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
@@ -32,8 +49,25 @@ class EquipmentListModal extends React.Component {
         );
     }
 
+    getSlot(type) {
+        switch (type) {
+            case 2:
+                return "weapon";
+            case 3:
+                return "armor";
+            case 4:
+                return "helmet";
+            case 5:
+                return "other";
+            case 11:
+                return "orb";
+        }
+        return undefined;
+    }
+
     componentDidMount() {
-        fetch('http://api.heroesofumbra.com/v1/items', {
+        console.log("CALLING API");
+        fetch('https://api.heroesofumbra.com/v1/items', {
             method: 'GET',
             credentials: "same-origin", //include, same-origin
             headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
