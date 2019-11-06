@@ -10,9 +10,9 @@ class EquippableItem extends React.Component {
     render() {
         if (this.props.item == null) {
             return <tr>
-                <td>{this.props.slot}</td>
-                <td colspan="3">
-                    <Button variant="primary" onClick={() => this.props.showEquipment(this.props.slot)} block>Equip
+                <td>{this.props.slot.replace(/^\w/, c => c.toUpperCase())}</td>
+                <td colSpan="3">
+                    <Button variant="primary" size="sm" onClick={() => this.props.showEquipment(this.props.slot)} block>Equip
                         Something</Button>
                 </td>
             </tr>;

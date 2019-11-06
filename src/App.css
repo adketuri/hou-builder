@@ -17,3 +17,7 @@
 .item-attribute {
   display: inline-block;
 }
+
+.stat-button {
+  width: 50px;
+}

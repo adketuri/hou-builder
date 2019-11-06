@@ -2,18 +2,25 @@ import React, {Component} from "react";
 import Stat from "./Stat/Stat";
 import Level from "./Level/Level";
 import {connect} from "react-redux";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class Stats extends Component {
 
     render() {
         const listItems = [];
         for (const key in this.props.stats) {
-            listItems.push(<Stat key={key} name={key} value={this.props.stats[key]}/>);
+            listItems.push(<ListGroup.Item key={key}><Stat name={key} value={this.props.stats[key]}/></ListGroup.Item>);
         }
         return (
             <div>
-                <Level value={this.props.level}/>
-                {listItems}
+                <h1>Primary Stats</h1>
+                <Card>
+                    <Card.Header><Level value={this.props.level}/></Card.Header>
+                    <ListGroup variant="flush">
+                        {listItems}
+                    </ListGroup>
+                </Card>
             </div>
         );
     }

@@ -16,6 +16,7 @@ class Equipment extends Component {
         });
         return (<>
             <EquipmentListModal/>
+            <h1>Equipment</h1>
             <Table striped bordered hover>
                 <thead>
                 <tr>

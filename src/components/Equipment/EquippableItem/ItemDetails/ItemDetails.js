@@ -21,7 +21,7 @@ class ItemDetails extends React.Component {
                 this.props.hideEquipment();
             }
         }}>
-            {this.props.equip && <td> {this.props.slot}</td>}
+            {this.props.equip && <td> {this.props.slot.replace(/^\w/, c => c.toUpperCase())}</td>}
             <td>{this.props.item.name}</td>
             <td>{this.props.item.description}</td>
             <td>{items}</td>

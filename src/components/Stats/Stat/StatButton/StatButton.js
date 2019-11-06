@@ -9,8 +9,9 @@ export default class StatButton extends Component {
 
     render() {
         const value = this.props.value;
+        const variant = this.props.value > 0 ? "outline-primary" : "outline-danger";
         return (
-            <Button className="w-5" variant="link" onClick={() => this.click()}>{value}</Button>
+            <Button size="sm" className="stat-button" variant={variant} onClick={() => this.click()}>{value}</Button>
         );
     }
 }
