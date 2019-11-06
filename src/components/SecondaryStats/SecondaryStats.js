@@ -34,10 +34,33 @@ class SecondaryStats extends React.Component {
                     {this.getRow("matk", "mdef")}
                     {this.getRow("aspd", "cspd")}
                     {this.getRow("crit", "cdmg")}
+
+                    {this.getDamageRow("Physical Damage", "Power", "atk")}
+                    {this.getDamageRow("Magical Damage", "Wisdom", "matk")}
+                    {this.getHealthRow()}
+
                     </tbody>
                 </Table>
             </div>
         );
+    }
+
+    getHealthRow() {
+        const lvl = this.props.stats.level;
+        const stam = this.props.stats.stats['Stamina'];
+        const result = Math.floor(8 + 2 * lvl + (lvl * stam * stam) / 300 + stam * 4);
+        return <tr>
+            <td>Hit Points</td>
+            <td colSpan="3">{result}</td>
+        </tr>;
+    }
+
+    getDamageRow(name, primary, secondary) {
+        const result = Math.max(1, Math.floor(this.sum(secondary) / 25 * this.props.stats.stats[primary] * 2));
+        return <tr>
+            <td>{name}</td>
+            <td colSpan="3">{result}</td>
+        </tr>;
     }
 
     getRow(stat1, stat2) {
@@ -64,7 +87,7 @@ class SecondaryStats extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        stats: state.stats,
+        stats: state.primaryStats,
         equipment: state.equipment,
     };
 }
