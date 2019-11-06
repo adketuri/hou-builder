@@ -72,7 +72,6 @@ class EquipmentListModal extends React.Component {
     }
 
     componentDidMount() {
-        console.log("CALLING API");
         fetch('https://api.heroesofumbra.com/v1/items', {
             method: 'GET',
             credentials: "same-origin", //include, same-origin
