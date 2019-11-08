@@ -21,7 +21,8 @@ export default class SkillTree extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Stats</th>
+                <th>Cost</th>
+                <th>Rank</th>
               </tr>
             </thead>
             <tbody>{s}</tbody>

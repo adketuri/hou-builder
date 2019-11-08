@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 class Skill extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({ allocation: 0 });
   }
 
   render() {
@@ -18,11 +17,11 @@ class Skill extends React.Component {
         <td>{skill.description}</td>
         <td>{skill.cost}</td>
         <td>
-          {this.state.allocation}
+          {this.props.allocation}/9
           <Button
             size="sm"
             className="stat-button"
-            onClick={() => this.addSkillPoint(skill.id)}
+            onClick={() => this.props.addSkillPoint(this.props.id)}
           >
             +
           </Button>
@@ -34,7 +33,7 @@ class Skill extends React.Component {
 
 function mapStateToProps(state, props) {
   return {
-    allocation: state.allocations[props.id - 1]
+    allocation: state.skills.allocations[props.id]
   };
 }
 
@@ -46,6 +45,10 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 }
+
+Skill.defaultProps = {
+  allocation: 0
+};
 
 export default connect(
   mapStateToProps,
