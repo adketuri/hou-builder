@@ -28,3 +28,10 @@ export const hideEquipment = () => {
     }
 };
 
+export const addSkillPoint = (id) => {
+    return {
+        type: "SKILL_ADDED",
+        payload: {id}
+    }
+};
+

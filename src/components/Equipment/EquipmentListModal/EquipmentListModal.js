@@ -6,6 +6,7 @@ import {changeEquipment, hideEquipment, showEquipment} from "../../../actions";
 import {connect} from "react-redux";
 import ItemDetails from "../EquippableItem/ItemDetails/ItemDetails";
 import Table from "react-bootstrap/Table";
+import {trackPromise} from "react-promise-tracker";
 
 class EquipmentListModal extends React.Component {
 
@@ -72,16 +73,13 @@ class EquipmentListModal extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://api.heroesofumbra.com/v1/items', {
+        trackPromise(fetch('https://api.heroesofumbra.com/v1/items', {
             method: 'GET',
             credentials: "same-origin", //include, same-origin
             headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
-        })
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({items: data.items})
-            })
-            .catch(console.log)
+        })).then(res => res.json()).then((data) => {
+            this.setState({items: data})
+        }).catch(console.log)
     }
 }
 
